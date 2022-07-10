@@ -1,0 +1,1 @@
+{ "msbuild": { "useBundledOnly": true, "omnisharp.projectLoadTimeout": 600 } }
