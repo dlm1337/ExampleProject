@@ -1,4 +1,4 @@
-namespace TodoApi;
+namespace MyApiApp.WebApi;
 
 public class WeatherForecast
 {
