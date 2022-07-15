@@ -13,6 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { RouterModule } from '@angular/router';
     MatSidenavModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatGridListModule
   ],
   providers: [],
   entryComponents: [MainContentComponent],
