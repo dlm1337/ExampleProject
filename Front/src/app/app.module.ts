@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +13,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ConfigService } from './services/config.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
   ],
   imports: [
     BrowserModule,
+    // import HttpClientModule after BrowserModule.
+    HttpClientModule,
     RouterModule.forRoot([{ path: 'main', component: MainContentComponent }]),
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -33,9 +37,17 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatSidenavModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      deps: [ConfigService],
+      useFactory: (configService: ConfigService) => () =>
+        configService.loadAppConfig(),
+    },
+  ],
   entryComponents: [MainContentComponent],
   bootstrap: [AppComponent],
 })

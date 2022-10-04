@@ -1,0 +1,7 @@
+{
+    "apiBaseUrl": "http://localhost:7200/api/todoitems",
+    "mongodb": {
+      "host": "localhost",
+      "port": 5432
+    }
+}

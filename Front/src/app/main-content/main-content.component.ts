@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { RestService } from '../services/rest.service';
+import {MatButtonModule} from '@angular/material/button';
 export interface Tile {
   color: string;
   cols: number;
@@ -13,7 +14,7 @@ export interface Tile {
   styleUrls: ['./main-content.component.scss'],
 })
 export class MainContentComponent implements OnInit {
-  constructor() {}
+  constructor(private restSvc: RestService) {}
 
   ngOnInit(): void {}
 
@@ -23,4 +24,8 @@ export class MainContentComponent implements OnInit {
     { text: 'Three', cols: 1, rows: 1, color: 'lightpink' },
     { text: 'Four', cols: 2, rows: 1, color: '#DDBDF1' },
   ];
+
+  public grabId() {
+    this.restSvc.getIdOne()
+  }
 }
