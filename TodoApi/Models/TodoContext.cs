@@ -5,11 +5,17 @@ namespace TodoApi.Models
 {
     public class TodoContext : DbContext
     {
-        public TodoContext(DbContextOptions<TodoContext> options)
+        protected readonly IConfiguration Configuration;
+        public TodoContext(DbContextOptions<TodoContext> options, IConfiguration configuration)
             : base(options)
         {
+            Configuration = configuration;
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            // connect to postgres with connection string from app settings
+            options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
+        }
         public DbSet<TodoItem> TodoItems { get; set; } = null!;
     }
 }
