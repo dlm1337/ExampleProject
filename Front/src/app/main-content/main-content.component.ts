@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../services/rest.service';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { TodoItem } from '../types/todoItem';
 export interface Tile {
   color: string;
   cols: number;
@@ -26,6 +27,12 @@ export class MainContentComponent implements OnInit {
   ];
 
   public grabId() {
-    this.restSvc.getIdOne()
+    var todo = new TodoItem();
+    console.log('was here');
+    var poo = this.restSvc.getIdOne('1').subscribe((resp) => {
+      todo = resp;
+      console.log(resp);
+      console.log(todo);
+    });
   }
 }

@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { TodoItem } from '../types/todoItem';
 import { ConfigService } from './config.service';
 
 @Injectable({
@@ -15,11 +16,11 @@ export class RestService {
     this.url = this.cfg.apiBaseUrl;
   }
 
-  getIdOne(): Observable<boolean> {
-    const url = this.url + '1';
+  getIdOne(req: String): Observable<TodoItem> {
+    const url = this.url + 'api/todoitems/' + req;
+
     return this.http.get(url).pipe(
       map((resp: any) => {
-        console.log(resp);
         return resp;
       }),
       catchError((error) => {

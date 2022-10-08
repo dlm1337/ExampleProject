@@ -46,7 +46,9 @@ import { ConfigService } from './services/config.service';
       deps: [ConfigService],
       useFactory: (configService: ConfigService) => () =>
         configService.loadAppConfig(),
+
     },
+
   ],
   entryComponents: [MainContentComponent],
   bootstrap: [AppComponent],
