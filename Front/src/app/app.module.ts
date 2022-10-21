@@ -16,13 +16,16 @@ import { RouterModule } from '@angular/router';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ConfigService } from './services/config.service';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { ExampleDialogComponent } from './dialog/example-dialog/example-dialog.component';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     FooterComponent,
     MainContentComponent,
+    ExampleDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,8 @@ import { ConfigService } from './services/config.service';
     MatFormFieldModule,
     MatSelectModule,
     MatGridListModule,
+    MatDialogModule,
+    MatInputModule,
   ],
   providers: [
     {
@@ -46,11 +51,9 @@ import { ConfigService } from './services/config.service';
       deps: [ConfigService],
       useFactory: (configService: ConfigService) => () =>
         configService.loadAppConfig(),
-
     },
-
   ],
-  entryComponents: [MainContentComponent],
+  entryComponents: [MainContentComponent, ExampleDialogComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
