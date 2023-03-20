@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddCors();
 builder.Services.AddControllers();
-builder.Services.AddDbContext<TodoContext>();
+builder.Services.AddDbContext<TodoContext>(); 
 // builder.Services.AddDbContext<TodoContext>(opt =>
 //     opt.UseInMemoryDatabase("TodoList"));
 //builder.Services.AddSwaggerGen(c =>
@@ -15,7 +15,7 @@ builder.Services.AddDbContext<TodoContext>();
 //    c.SwaggerDoc("v1", new() { Title = "TodoApi", Version = "v1" });
 //});
 
-var app = builder.Build();
+var app = builder.Build(); 
 
 // Configure the HTTP request pipeline.
 if (builder.Environment.IsDevelopment())
