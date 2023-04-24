@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { TodoItem } from '../types/todoItem';
+import { NameAndAddress} from '../types/nameAndAddress';
 import { ConfigService } from './config.service';
 
 @Injectable({
@@ -16,10 +16,24 @@ export class RestService {
     this.url = this.cfg.apiBaseUrl;
   }
 
-  getIdOne(req: String): Observable<TodoItem> {
+  getIdOne(req: String): Observable<NameAndAddress> {
     const url = this.url + 'api/todoitems/' + req;
 
     return this.http.get(url).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((error) => {
+        console.log(error);
+        return of(error);
+      })
+    );
+  }
+
+  saveNameAndAddress(req: NameAndAddress): Observable<NameAndAddress> {
+    const url = this.url + 'upsertProduct';
+    console.log(req);
+    return this.http.post(url, req).pipe(
       map((resp: any) => {
         return resp;
       }),

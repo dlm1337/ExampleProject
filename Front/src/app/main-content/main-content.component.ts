@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { MatButtonModule } from '@angular/material/button';
-import { TodoItem } from '../types/todoItem';
+import { NameAndAddress } from '../types/nameAndAddress';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ExampleDialogComponent } from '../dialog/example-dialog/example-dialog.component';
 
@@ -30,7 +30,7 @@ export class MainContentComponent implements OnInit {
   }
 
   public grabId() {
-    var todo = new TodoItem();
+    var todo = new NameAndAddress();
     console.log('was here');
     var poo = this.restSvc.getIdOne('1').subscribe((resp) => {
       todo = resp;

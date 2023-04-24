@@ -19,6 +19,7 @@ import { ConfigService } from './services/config.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ExampleDialogComponent } from './dialog/example-dialog/example-dialog.component';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,8 @@ import { MatInputModule } from '@angular/material/input';
   imports: [
     BrowserModule,
     // import HttpClientModule after BrowserModule.
+    FormsModule, 
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([{ path: 'main', component: MainContentComponent }]),
     AppRoutingModule,
