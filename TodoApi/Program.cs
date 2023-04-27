@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
+using TodoApi.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,13 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<TodoContext>(); 
+builder.Services.AddDbContext<NameAndAddressContext>();
 // builder.Services.AddDbContext<TodoContext>(opt =>
 //     opt.UseInMemoryDatabase("TodoList"));
 //builder.Services.AddSwaggerGen(c =>
 //{
 //    c.SwaggerDoc("v1", new() { Title = "TodoApi", Version = "v1" });
 //});
-
+// builder.Services.AddDbContext<NameAndAddressContext>(opt =>
+//     opt.UseInMemoryDatabase("TodoList"));
+// builder.Services.AddSwaggerGen(c =>
+// {
+//    c.SwaggerDoc("v1", new() { Title = "TodoApi", Version = "v1" });
+// });
 var app = builder.Build(); 
 
 // Configure the HTTP request pipeline.

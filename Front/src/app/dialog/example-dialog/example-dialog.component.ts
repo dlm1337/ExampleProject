@@ -56,8 +56,7 @@ export class ExampleDialogComponent implements OnInit {
        console.log("failure with posting name and address")
       }
     });
-    return nameAndAddress;
-    console.log(nameAndAddress)
+    return nameAndAddress; 
   }
   ngAfterViewInit() { 
     this.cdr.detectChanges();

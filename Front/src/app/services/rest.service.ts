@@ -31,7 +31,7 @@ export class RestService {
   }
 
   saveNameAndAddress(req: NameAndAddress): Observable<NameAndAddress> {
-    const url = this.url + 'upsertProduct';
+    const url = this.url + 'api/NameAndAddress';
     console.log(req);
     return this.http.post(url, req).pipe(
       map((resp: any) => {
