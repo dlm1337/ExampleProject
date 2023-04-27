@@ -36,8 +36,8 @@ export class ExampleDialogComponent implements OnInit {
   }
 
   createNameAndAddress() {
-    const nameAndAddress: NameAndAddress = {
-      id: 1,
+    this.nameAndAddress = {
+      id: '',
       company: this.mainBasic.company.value,
       firstName: this.mainBasic.firstName.value,
       lastName: this.mainBasic.lastName.value,
@@ -47,18 +47,18 @@ export class ExampleDialogComponent implements OnInit {
       state: this.mainBasic.state.value,
       postalCode: this.mainBasic.postalCode.value
     };
-    this.restSvc.saveNameAndAddress(nameAndAddress).subscribe((resp) => {
+    this.restSvc.saveNameAndAddress(this.nameAndAddress).subscribe((resp) => {
       if (resp) {
         //this.toastSvc.success('Ammo Created');
         console.log("success with posting name and address")
       } else {
-       // this.toastSvc.error('couldnt create ammo');
-       console.log("failure with posting name and address")
+        // this.toastSvc.error('couldnt create ammo');
+        console.log("failure with posting name and address")
       }
     });
-    return nameAndAddress; 
+    return this.nameAndAddress;
   }
-  ngAfterViewInit() { 
+  ngAfterViewInit() {
     this.cdr.detectChanges();
   }
 

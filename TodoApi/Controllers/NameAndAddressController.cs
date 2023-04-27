@@ -33,6 +33,7 @@ namespace TodoApi.Controllers
         {
             var NameAndAddress = new NameAndAddress
             {
+                Id = Guid.NewGuid().ToString(),
                 IsComplete = NameAndAddressDTO.IsComplete,
                 Company = NameAndAddressDTO.Company,
                 FirstName = NameAndAddressDTO.FirstName,
@@ -57,6 +58,7 @@ namespace TodoApi.Controllers
        new NameAndAddressDTO
        {
            IsComplete = NameAndAddress.IsComplete,
+           Id = NameAndAddress.Id,
            Company = NameAndAddress.Company,
            FirstName = NameAndAddress.FirstName,
            LastName = NameAndAddress.LastName,
