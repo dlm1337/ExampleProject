@@ -10,6 +10,7 @@ namespace TodoApi.Data
             : base(options)
         {
             Configuration = configuration;
+            NameAndAddresses = Set<NameAndAddress>();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {

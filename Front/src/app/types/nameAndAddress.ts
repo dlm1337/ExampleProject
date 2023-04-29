@@ -1,6 +1,5 @@
 
-export class NameAndAddress {
-  id: string;
+export class NameAndAddress { 
   company: string;
   firstName: string;
   lastName: string;

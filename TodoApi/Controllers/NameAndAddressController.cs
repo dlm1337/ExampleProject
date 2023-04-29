@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TodoApi.Data;
+using System.Threading.Tasks;
 using TodoApi.Models;
+using TodoApi.Service;
 
 namespace TodoApi.Controllers
 {
@@ -9,65 +9,34 @@ namespace TodoApi.Controllers
     [ApiController]
     public class NameAndAddressController : ControllerBase
     {
-        private readonly NameAndAddressContext _context;
+        private readonly INameAndAddressService _nameAndAddressService;
 
-        public NameAndAddressController(NameAndAddressContext context)
+        public NameAndAddressController(INameAndAddressService nameAndAddressService)
         {
-            _context = context;
+            _nameAndAddressService = nameAndAddressService;
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<NameAndAddressDTO>> GetNameAndAddress(long id)
         {
-            var NameAndAddress = await _context.NameAndAddresses.FindAsync(id);
+            var nameAndAddress = await _nameAndAddressService.GetNameAndAddress(id);
 
-            if (NameAndAddress == null)
+            if (nameAndAddress == null)
             {
                 return NotFound();
             }
 
-            return ItemToDTO(NameAndAddress);
+            return Ok(nameAndAddress);
         }
 
         [HttpPost]
-        public async Task<ActionResult<NameAndAddressDTO>> CreateNameAndAddress(NameAndAddressDTO NameAndAddressDTO)
+        public async Task<ActionResult<NameAndAddressDTO>> CreateNameAndAddress(NameAndAddressDTO nameAndAddressDTO)
         {
-            var NameAndAddress = new NameAndAddress
-            {
-                Id = Guid.NewGuid().ToString(),
-                IsComplete = NameAndAddressDTO.IsComplete,
-                Company = NameAndAddressDTO.Company,
-                FirstName = NameAndAddressDTO.FirstName,
-                LastName = NameAndAddressDTO.LastName,
-                Address = NameAndAddressDTO.Address,
-                Address2 = NameAndAddressDTO.Address2,
-                City = NameAndAddressDTO.City,
-                State = NameAndAddressDTO.State,
-                PostalCode = NameAndAddressDTO.PostalCode
-            };
+            var createdNameAndAddress = await _nameAndAddressService.CreateNameAndAddress(nameAndAddressDTO);
 
-            _context.NameAndAddresses.Add(NameAndAddress);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(
-                nameof(GetNameAndAddress),
-                new { id = NameAndAddress.Id },
-                ItemToDTO(NameAndAddress));
+            return CreatedAtAction(nameof(GetNameAndAddress),
+                new { id = createdNameAndAddress.Id },
+                createdNameAndAddress);
         }
-
-        private static NameAndAddressDTO ItemToDTO(NameAndAddress NameAndAddress) =>
-       new NameAndAddressDTO
-       {
-           IsComplete = NameAndAddress.IsComplete,
-           Id = NameAndAddress.Id,
-           Company = NameAndAddress.Company,
-           FirstName = NameAndAddress.FirstName,
-           LastName = NameAndAddress.LastName,
-           Address = NameAndAddress.Address,
-           Address2 = NameAndAddress.Address2,
-           City = NameAndAddress.City,
-           State = NameAndAddress.State,
-           PostalCode = NameAndAddress.PostalCode
-       };
-
     }
 }

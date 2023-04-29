@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -11,6 +11,7 @@ import { RestService } from 'src/app/services/rest.service';
   styleUrls: ['./example-dialog.component.scss'],
 })
 export class ExampleDialogComponent implements OnInit {
+  public respReceived: EventEmitter<any> = new EventEmitter<any>();
   public mainGroup: FormGroup;
   public nameAndAddress: NameAndAddress;
 
@@ -36,8 +37,7 @@ export class ExampleDialogComponent implements OnInit {
   }
 
   createNameAndAddress() {
-    this.nameAndAddress = {
-      id: '',
+    this.nameAndAddress = { 
       company: this.mainBasic.company.value,
       firstName: this.mainBasic.firstName.value,
       lastName: this.mainBasic.lastName.value,
@@ -48,11 +48,9 @@ export class ExampleDialogComponent implements OnInit {
       postalCode: this.mainBasic.postalCode.value
     };
     this.restSvc.saveNameAndAddress(this.nameAndAddress).subscribe((resp) => {
-      if (resp) {
-        //this.toastSvc.success('Ammo Created');
-        console.log("success with posting name and address")
-      } else {
-        // this.toastSvc.error('couldnt create ammo');
+      if (resp) { 
+        console.log(resp)
+      } else { 
         console.log("failure with posting name and address")
       }
     });

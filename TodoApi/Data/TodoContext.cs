@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
+using TodoApi.Models;
 
-namespace TodoApi.Models
+namespace TodoApi.Data
 {
     public class TodoContext : DbContext
     {

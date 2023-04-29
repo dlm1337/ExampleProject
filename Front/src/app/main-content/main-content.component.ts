@@ -26,16 +26,5 @@ export class MainContentComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = 'some data';
     let dialogRef = this.matDialog.open(ExampleDialogComponent, dialogConfig);
-    this.grabId();
-  }
-
-  public grabId() {
-    var todo = new NameAndAddress();
-    console.log('was here');
-    var poo = this.restSvc.getIdOne('1').subscribe((resp) => {
-      todo = resp;
-      console.log(resp);
-      console.log(todo);
-    });
   }
 }
