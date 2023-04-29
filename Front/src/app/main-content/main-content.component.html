@@ -4,12 +4,20 @@
       <button mat-button color="primary" (click)="openDialog()">Primary</button>
     </mat-grid-tile>
     <mat-grid-tile rowspan="3">
-      <div *ngIf="latestNameAndAddress">
-        <h1>{{latestNameAndAddress.lastName}}, {{latestNameAndAddress.firstName}}</h1>
-        <p>{{latestNameAndAddress.company}}</p>
-        <p>{{latestNameAndAddress.address}}</p>
-        <p>{{latestNameAndAddress.address2}}</p>
-        <p>{{latestNameAndAddress.city}}, {{latestNameAndAddress.state}} {{latestNameAndAddress.postalCode}}</p>
+      <div *ngIf="latestNameAndAddress" class="card">
+        <div class="card-header">
+          <h2>{{latestNameAndAddress.firstName}} {{latestNameAndAddress.lastName}}</h2>
+          <h4>{{latestNameAndAddress.company}}</h4>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>Address:</strong> {{latestNameAndAddress.address}}</li>
+            <li><strong>Address2:</strong> {{latestNameAndAddress.address2}}</li>
+            <li><strong>City:</strong> {{latestNameAndAddress.city}}</li>
+            <li><strong>State:</strong> {{latestNameAndAddress.state}}</li>
+            <li><strong>Postal Code:</strong> {{latestNameAndAddress.postalCode}}</li>
+          </ul>
+        </div>
       </div>
     </mat-grid-tile>
     <mat-grid-tile rowspan="3">3</mat-grid-tile>
