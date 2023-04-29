@@ -7,6 +7,7 @@ namespace TodoApi.Service
     {
         Task<NameAndAddressDTO> GetNameAndAddress(long id);
         Task<NameAndAddressDTO> CreateNameAndAddress(NameAndAddressDTO NameAndAddressDTO);
+         Task<NameAndAddressDTO> GetLatestNameAndAddress();
     }
 
     public class NameAndAddressService : INameAndAddressService
@@ -60,6 +61,26 @@ namespace TodoApi.Service
             var createdNameAndAddress = await _repository.CreateNameAndAddress(nameAndAddress);
 
             return ItemToDTO(createdNameAndAddress);
+        }
+
+        public async Task<NameAndAddressDTO> GetLatestNameAndAddress()
+        {
+            try
+            {
+                var latestNameAndAddress = await _repository.GetLatestNameAndAddress();
+
+                if (latestNameAndAddress == null)
+                {
+                    throw new Exception("No NameAndAddress found.");
+                }
+
+                return ItemToDTO(latestNameAndAddress);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it in some other way
+                throw new Exception("An error occurred while getting the latest NameAndAddress.", ex);
+            }
         }
         private static NameAndAddressDTO ItemToDTO(NameAndAddress NameAndAddress) =>
            new NameAndAddressDTO

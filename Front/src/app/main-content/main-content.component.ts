@@ -18,9 +18,21 @@ export interface Tile {
   styleUrls: ['./main-content.component.scss'],
 })
 export class MainContentComponent implements OnInit {
+  public latestNameAndAddress: NameAndAddress;
+
   constructor(private matDialog: MatDialog, private restSvc: RestService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.restSvc.getLatestNameAndAddress().subscribe(
+      (nameAndAddress: NameAndAddress) => {
+        this.latestNameAndAddress = nameAndAddress;
+        console.log(this.latestNameAndAddress); // log the retrieved name and address
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();

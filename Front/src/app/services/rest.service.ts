@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { NameAndAddress} from '../types/nameAndAddress';
+import { NameAndAddress } from '../types/nameAndAddress';
 import { ConfigService } from './config.service';
 
 @Injectable({
@@ -44,5 +44,16 @@ export class RestService {
     );
   }
 
-  
+  getLatestNameAndAddress(): Observable<NameAndAddress> {
+    const url = this.url + 'api/NameAndAddress/Latest';
+    return this.http.get(url).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((error) => {
+        console.log(error);
+        return of(error);
+      })
+    );
+  }
 }

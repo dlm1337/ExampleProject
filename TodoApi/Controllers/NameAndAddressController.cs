@@ -38,5 +38,18 @@ namespace TodoApi.Controllers
                 new { id = createdNameAndAddress.Id },
                 createdNameAndAddress);
         }
+
+        [HttpGet("Latest")]
+        public async Task<ActionResult<NameAndAddressDTO>> GetLatestNameAndAddress()
+        {
+            var latestNameAndAddress = await _nameAndAddressService.GetLatestNameAndAddress();
+
+            if (latestNameAndAddress == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(latestNameAndAddress);
+        }
     }
 }

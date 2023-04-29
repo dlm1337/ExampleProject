@@ -10,8 +10,7 @@ import { RestService } from 'src/app/services/rest.service';
   templateUrl: './example-dialog.component.html',
   styleUrls: ['./example-dialog.component.scss'],
 })
-export class ExampleDialogComponent implements OnInit {
-  public respReceived: EventEmitter<any> = new EventEmitter<any>();
+export class ExampleDialogComponent implements OnInit { 
   public mainGroup: FormGroup;
   public nameAndAddress: NameAndAddress;
 
@@ -37,7 +36,7 @@ export class ExampleDialogComponent implements OnInit {
   }
 
   createNameAndAddress() {
-    this.nameAndAddress = { 
+    this.nameAndAddress = {
       company: this.mainBasic.company.value,
       firstName: this.mainBasic.firstName.value,
       lastName: this.mainBasic.lastName.value,
@@ -48,13 +47,15 @@ export class ExampleDialogComponent implements OnInit {
       postalCode: this.mainBasic.postalCode.value
     };
     this.restSvc.saveNameAndAddress(this.nameAndAddress).subscribe((resp) => {
-      if (resp) { 
+      if (resp) {
         console.log(resp)
-      } else { 
+      } else {
         console.log("failure with posting name and address")
       }
     });
-    return this.nameAndAddress;
+
+    this.mainGroup.reset();
+    this.dialogRef.close();
   }
   ngAfterViewInit() {
     this.cdr.detectChanges();

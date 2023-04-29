@@ -3,7 +3,15 @@
     <mat-grid-tile colspan="2">
       <button mat-button color="primary" (click)="openDialog()">Primary</button>
     </mat-grid-tile>
-    <mat-grid-tile rowspan="3">2</mat-grid-tile>
+    <mat-grid-tile rowspan="3">
+      <div *ngIf="latestNameAndAddress">
+        <h1>{{latestNameAndAddress.lastName}}, {{latestNameAndAddress.firstName}}</h1>
+        <p>{{latestNameAndAddress.company}}</p>
+        <p>{{latestNameAndAddress.address}}</p>
+        <p>{{latestNameAndAddress.address2}}</p>
+        <p>{{latestNameAndAddress.city}}, {{latestNameAndAddress.state}} {{latestNameAndAddress.postalCode}}</p>
+      </div>
+    </mat-grid-tile>
     <mat-grid-tile rowspan="3">3</mat-grid-tile>
   </mat-grid-list>
 </div>

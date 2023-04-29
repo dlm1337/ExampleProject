@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 using TodoApi.Data;
 using TodoApi.Models;
 
@@ -9,6 +11,7 @@ namespace TodoApi.Repo
         Task<NameAndAddress> GetNameAndAddress(long id);
         Task<NameAndAddress> CreateNameAndAddress(NameAndAddress NameAndAddress);
         Task<long> GetLastId();
+        Task<NameAndAddress> GetLatestNameAndAddress();
     }
 
     public class NameAndAddressRepository : INameAndAddressRepository
@@ -39,9 +42,22 @@ namespace TodoApi.Repo
 
             return NameAndAddress;
         }
+
         public async Task<long> GetLastId()
         {
             return await _context.NameAndAddresses.MaxAsync(x => (long?)x.Id) ?? 0;
+        }
+
+        public async Task<NameAndAddress> GetLatestNameAndAddress()
+        {
+            var latestNameAndAddress = await _context.NameAndAddresses.OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+
+            if (latestNameAndAddress == null)
+            {
+                throw new Exception("No NameAndAddress found.");
+            }
+
+            return latestNameAndAddress;
         }
     }
 }
