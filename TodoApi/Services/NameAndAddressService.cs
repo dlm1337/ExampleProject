@@ -7,7 +7,7 @@ namespace TodoApi.Service
     {
         Task<NameAndAddressDTO> GetNameAndAddress(long id);
         Task<NameAndAddressDTO> CreateNameAndAddress(NameAndAddressDTO NameAndAddressDTO);
-         Task<NameAndAddressDTO> GetLatestNameAndAddress();
+        Task<NameAndAddressDTO> GetLatestNameAndAddress();
     }
 
     public class NameAndAddressService : INameAndAddressService
